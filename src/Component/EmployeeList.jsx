@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import hotelService from "../Services/employeeService";
 import { Link } from "react-router-dom";
-
+import '../border.css'
 const EmployeeList = () => {
     const [employees, setEmployees] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -75,11 +75,11 @@ const EmployeeList = () => {
                 <table className="table table-bordered table-striped">
                     <thead className="thead-dark">
                         <tr>
-                            <th colSpan={6}><div className="" style={{marginLeft:'86%'}}>Total Count : {filteredEmployees.length}</div></th>
-                            <th> <Link to='/AddEmployeeList' className="btn btn-success">Add Employee</Link></th>
+                            <th colSpan={7}><div className="" style={{marginLeft:'86%'}}>Total Count : {filteredEmployees.length}</div></th>
+                            <th> <Link to='/AddEmployeeList' className="btn btn-success">Create Employee</Link></th>
                         </tr>
                         <tr>
-                            <th colSpan={6}><div className="" style={{ marginLeft: '90%' }}>Search</div></th>
+                            <th colSpan={7}><div className="" style={{ marginLeft: '90%' }}>Search</div></th>
                             <th>
                                 <input
                                     placeholder="Enter search keywords"
@@ -91,6 +91,7 @@ const EmployeeList = () => {
                         </tr>
                         <tr>
                             <th>Id</th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Gmail id</th>
                             <th>Designation</th>
@@ -104,6 +105,9 @@ const EmployeeList = () => {
                             filteredEmployees.map(employee => (
                                 <tr key={employee.id}>
                                     <td>{employee.id}</td>
+                                    <td>
+                                    <img className="ms-5 im" src={require(`../EmployeeImage/${employee.fileName}`)}></img>
+                                    </td>
                                     <td>{employee.name}</td>
                                     <td>{employee.gmailid}</td>
                                     <td>{employee.designation}</td>

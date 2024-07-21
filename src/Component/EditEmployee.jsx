@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import placesService from "../Services/employeeService";
+import employeeService from "../Services/employeeService";  // Ensure the correct import
 
 const EditEmployee = () => {
     const [name, setName] = useState('');
-    const [file, setFile] = useState(null); // Initialize to null
+    const [file, setFile] = useState(null);
     const [gmailid, setGmailid] = useState('');
     const [mobileno, setMobileno] = useState('');
     const [designation, setDesignation] = useState('');
     const [gender, setGender] = useState('');
-    const [course, setCourse] = useState([]); // Initialize to an empty array
+    const [course, setCourse] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
         if (id) {
-            placesService.get(id).then(place => {
+            employeeService.get(id).then(place => {
                 setName(place.data.name);
                 setGmailid(place.data.gmailid);
                 setMobileno(place.data.mobileno);
                 setDesignation(place.data.designation);
                 setGender(place.data.gender);
-                setCourse(place.data.course.split(',')); // Assuming course is a comma-separated string
+                setCourse(place.data.course.split(',')); 
             })
-                .catch(error => {
-                    console.log('Something went wrong', error);
-                })
+            .catch(error => {
+                console.log('Something went wrong', error);
+            });
         }
     }, [id]);
 
@@ -44,50 +44,35 @@ const EditEmployee = () => {
         }
     };
 
-    const validateEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
-
     const validateMobile = (mobile) => {
         const mobileRegex = /^\d{10}$/;
         return mobileRegex.test(mobile);
     };
 
-    const checkDuplicateEmail = async (email) => {
-        const response = await placesService.checkEmailDuplicate(email);
-        return response.data.isDuplicate;
-    };
+    
 
     const saveEmployee = async (e) => {
         e.preventDefault();
         
         try {
-            if (!name || !gmailid || !file || !mobileno || !designation || !gender || !course.length) {
+            if (!name || !file || !mobileno || !designation || !gender || !course.length) {
                 throw new Error('Please fill in all fields.');
-            }
-
-            if (!validateEmail(gmailid)) {
-                throw new Error('Invalid email format.');
             }
 
             if (!validateMobile(mobileno)) {
                 throw new Error('Invalid mobile number. Must be 10 digits.');
             }
 
-            const isDuplicate = await checkDuplicateEmail(gmailid);
-            if (isDuplicate) {
-                throw new Error('Email already exists.');
-            }
+
 
             const formData = new FormData();
             formData.append("name", name);
             formData.append("gmailid", gmailid);
-            formData.append("file", file); // Append selected file to FormData
+            formData.append("file", file);
             formData.append("mobileno", mobileno);
             formData.append("designation", designation);
             formData.append("gender", gender);
-            formData.append("course", course.join(',')); // Convert array to comma-separated string
+            formData.append("course", course.join(','));
 
             const config = {
                 headers: {
@@ -97,20 +82,19 @@ const EditEmployee = () => {
             
             let response;
             if (id) {
-                response = await placesService.update(id, formData, config);
+                response = await employeeService.update(id, formData, config);
                 console.log('Employee data updated successfully:', response.data);
-                
             } else {
-                response = await placesService.create(formData, config);
+                response = await employeeService.create(formData, config);
                 console.log('Employee added successfully:', response.data);
             }
 
-            navigate('/EmployeeList'); // Redirect user to home page after successful operation
+            navigate('/EmployeeList');
         } catch (error) {
             console.error('Error saving employee data:', error);
             setError(error.response?.data?.message || error.message || 'Failed to save employee data. Please try again later.');
         }
-    }
+    };
 
     return (
         <div className="container-fluid">
@@ -132,13 +116,13 @@ const EditEmployee = () => {
             </div>
             <form onSubmit={saveEmployee}>
                 <div className="form-group mt-3">
-                    <input type="text" className="form-control col-4" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter  Name" />
+                    <input type="text" className="form-control col-4" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter Name" />
                 </div>
                 <div className="form-group mt-2">
                     <input type="file" className="form-control col-4" onChange={handleFileChange} />
                 </div>
                 <div className="form-group mt-2">
-                    <input type="text" className="form-control col-4" value={gmailid} onChange={(e) => setGmailid(e.target.value)} placeholder="Enter the Gmail " />
+                    <input type="text" className="form-control col-4" value={gmailid} onChange={(e) => setGmailid(e.target.value)} placeholder="Enter Gmail" />
                 </div>
                 <div className="form-group mt-2">
                     <input type="text" className="form-control col-4" value={mobileno} onChange={(e) => setMobileno(e.target.value)} placeholder="Enter Mobile NO" />

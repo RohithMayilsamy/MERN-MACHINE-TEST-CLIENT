@@ -7,7 +7,7 @@ const AdminPage = () => {
 
     return (
         <div>
-            <div className="one mt-5">
+            <div className="one ">
                 <div className="two">
                     <div className="three">
                         <Link to="/" className="btn">Home</Link>

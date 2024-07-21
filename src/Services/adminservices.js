@@ -21,8 +21,14 @@ const remove =(id)=>
     return httpClient.delete(`/admin/${id}`);
 }
 
-const login = (data) => {
-    return httpClient.post("/admin", data);
+
+const login = (username, pwd) => {
+    return httpClient.get(`/admin/login`, {
+        params: {
+            username: username,
+            pwd: pwd
+        }
+    });
 }
 
 export default { getAll, create, get, update, remove, login };

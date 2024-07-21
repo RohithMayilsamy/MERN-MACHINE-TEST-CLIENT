@@ -21,4 +21,10 @@ const remove = id =>
     return httpClient.delete(`/employees/${id}`);
 }
 
-export default{getAll,create,get,update,remove}
+
+// Add this function to check for duplicate emails
+const checkEmailDuplicate = (email) => {
+    return httpClient.get(`/employees/checkEmailDuplicate?email=${email}`);
+}
+
+export default { getAll, create, get, update, remove, checkEmailDuplicate }

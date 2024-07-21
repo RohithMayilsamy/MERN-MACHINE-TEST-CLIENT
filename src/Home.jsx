@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import adminService from './Services/adminservices'; // Update this path as needed
 import { useNavigate } from 'react-router-dom';
 
@@ -10,17 +10,14 @@ const Home = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await adminService.login({ username, pwd: password });
-            if (response.status === 200) {
-                setLoginStatus('Login successful');
-                console.log('Storing username in localStorage:', username);
-                navigate('/admin');
-            } else {
-                setLoginStatus('Login failed: Incorrect username or password');
+            const response = await adminService.login(username, password);
+            if (response.data) {
+                setLoginStatus('Login successful!');
+                // Redirect to another page if needed
+                navigate('/admin'); // Update the route as needed
             }
         } catch (error) {
-            console.error('Login error:', error);
-            setLoginStatus('Login failed: Network error or server issue');
+            setLoginStatus('Invalid username or password');
         }
     };
 
@@ -56,7 +53,7 @@ const Home = () => {
                 </div>
                 <div className="row mt-4">
                     <div className="col-4"></div>
-                    <div className="col-4" style={{ backgroundColor: '#B1FA2E' }}>
+                    <div className="col-1" style={{ backgroundColor: '#B1FA2E' }}>
                         <button className="btn" onClick={handleLogin}>Login</button>
                     </div>
                 </div>
