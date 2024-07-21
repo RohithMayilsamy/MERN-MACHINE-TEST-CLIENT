@@ -1,0 +1,132 @@
+.one{
+    border: 2px solid black;
+    width: 900px;
+    height: 300px;
+    margin-left: 250px;
+}
+.two
+{
+  border: 2px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+    width: 900px;
+    height: 40px;
+   
+}
+.three
+{
+  border: 2px solid none;
+  width: 290px;
+  height: 40px;
+  float: left;
+}
+.four
+{
+  border: 2px solid none;
+  width: 280px;
+  height: 40px;
+  float: left;
+  margin-left: 10px;
+}
+.five
+{
+  border: 2px solid none;
+  width: 280px;
+  height: 40px;
+  
+  margin-left: 599px;
+  
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  td{
+    border: 1px solid  none;
+    text-align: left;
+    padding: 100px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .zz{
+    text-align: center;
+  }
+  .datatable-container {
+    width: 100%; /* Adjust the percentage as needed */
+    margin: auto;
+}
+
+.p-datatable-responsive-demo .p-datatable-thead > tr > th,
+.p-datatable-responsive-demo .p-datatable-tbody > tr > td {
+    padding: 1.5rem; /* Adjust padding to control column width */
+}
+
+.p-datatable-responsive-demo .p-datatable-tbody > tr > td {
+    white-space: nowrap; /* Prevent text wrapping */
+}
+.oneone
+{
+  border: 2px solid none;
+  width: 897px;
+  height: 30px;
+  background-color: yellow;
+}
+.oneq{
+  border: 2px solid black;
+  width: 100%;
+  height: 70px;
+ 
+}
+.twoq
+{
+border: 2px solid black;
+border-top: none;
+border-left: none;
+border-right: none;
+  width: 100%;
+  height: 40px;
+ 
+}
+.threeq
+{
+border: 2px solid none;
+width: 33%;
+height: 40px;
+float: left;
+}
+.fourq
+{
+border: 2px solid none;
+width: 33%;
+height: 40px;
+float: left;
+margin-left: 10px;
+}
+.fiveq
+{
+border: 2px solid none;
+width: 33%;
+height: 40px;
+
+margin-left: 599px;
+
+}
+.oneoneq
+{
+  border: 2px solid none;
+  width: 100%;
+  height: 30px;
+  background-color: yellow;
+}
+
+ 
